@@ -30,8 +30,6 @@ body {
 
 /* Стили для заголовков */
 h1, h2, h3, h4 {
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 2px;
     color: #000;
     text-transform: uppercase;
     margin-top: 0;
