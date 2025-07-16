@@ -1,0 +1,517 @@
+/* Import шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;700&display=swap');
+
+/* Общие стили */
+body {
+    font-family: 'Roboto Mono', monospace;
+    background-color: #f5f5f5; /* Вернули ваш оригинальный фон */
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Стили для нео-брутализма */
+.neo-brutalist {
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    transition: all 0.2s ease;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.neo-brutalist:hover {
+    box-shadow: 6px 6px 0 #000;
+    transform: translate(2px, 2px);
+}
+
+/* Стили для заголовков */
+h1, h2, h3, h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    color: #000;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: #333;
+}
+
+/* Контейнеры и отступы */
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+/* Стили для карточек компонентов */
+.component-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.component-preview {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    min-height: 120px;
+    text-align: center;
+    border-bottom: 4px solid #000;
+}
+
+.component-card p {
+    padding: 1.5rem;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+/* Сетка для модулей (не используется в текущем HTML, но оставлено для будущего расширения) */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Стили для кнопок */
+.button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #ffcc00;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.button:hover {
+    background-color: #ffdd33;
+}
+
+/* Дополнительные стили для нового контента */
+.event-date {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.payment-info {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px dashed #000;
+}
+
+.payment-info p {
+    margin-bottom: 0.5rem;
+}
+
+.content-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.content-list li {
+    background-color: #ffe600;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+.content-list li:before {
+    content: '→';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: #000;
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Стили для навигации */
+.main-nav {
+    padding: 1rem 2rem;
+    background-color: #1a1a1a;
+    border-top: 4px solid #000;
+    border-bottom: 4px solid #000;
+    box-shadow: 0 8px 0 #000, 0 -8px 0 #000;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.main-nav li {
+    margin: 0;
+}
+
+.main-nav a {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    background-color: #ffcc00;
+    color: #000;
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    transition: all 0.1s ease;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.main-nav a:hover {
+    background-color: #ffdd33;
+    box-shadow: 2px 2px 0 #000;
+    transform: translate(2px, 2px);
+}
+
+.main-nav a.active {
+    background-color: #000;
+    color: #ffcc00;
+    box-shadow: inset 2px 2px 0 #ffcc00;
+    pointer-events: none;
+}
+
+/* Стили для таблиц */
+.brutalist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.brutalist-table th,
+.brutalist-table td {
+    border: 2px solid #000;
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.95rem;
+}
+
+.brutalist-table th {
+    background-color: #ffcc00;
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.brutalist-table tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+.brutalist-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-nav a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    border-top: 4px solid #000;
+    box-shadow: 0 -8px 0 #000;
+}
+
+/* --- Стили для ползунка "Стоимость жизни" --- */
+.wheel-container {
+    padding: 2rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    background-color: #fff;
+    overflow: hidden; /* Ensure cities don't overflow */
+}
+
+
+:root {
+    --thumb-size: 2rem;
+    --track-size: 4rem;
+    --half-thumb-size: calc(var(--track-size) / 2);
+
+    --value: 0; /* This will be set by JS */
+
+    /* Adjusted colors for cost of living */
+    --cost-low: #78b232;   /* Green for low cost */
+    --cost-medium: #efad08; /* Orange for medium cost */
+    --cost-high: #da3d27;  /* Red for high cost */
+    --accent-000: #000; /* Thumb color (black) */
+}
+
+
+.wheel {
+	color: var(--accent-900);
+	display: block;
+	width: 15rem;
+	margin: 0 auto;
+	font-size: 0.8rem;
+	font-weight: bold;
+	aspect-ratio: 1 / 1;
+
+	display: inline-grid;
+	align-items: center;
+	background: no-repeat;
+	container-type: inline-size;
+	container-name: knobs;
+	align-items: center;
+	justify-items: center;
+	position: relative;
+	// background: #ff000030;
+
+    /* Add transition for city visibility */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Show city names on hover over the wheel container */
+.wheel-container:hover .wheel__numerals > span {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) translateY(0); /* Reset transform on hover */
+}
+
+
+.wheel::after,
+.wheel::before {
+    content: "";
+    position: absolute;
+    inset: calc(var(--track-size) * -0.5);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    /* Возвращаем mix-blend-mode, который был в оригинале и пропал в предыдущей версии */
+    mix-blend-mode: darken; 
+    pointer-events: none;
+}
+
+.wheel::before {
+    width: var(--track-size);
+    box-shadow: 100cqw 0px 0 var(--cost-low); /* Use cqw here */
+    z-index: 1;
+    background-color: var(--cost-low);
+    top: calc(50% + calc(var(--track-size) * -0.5));
+}
+
+.wheel::after {
+    background: none;
+    width: auto;
+    border-width: var(--track-size);
+    inset: calc(var(--track-size) * -0.5);
+    border: var(--track-size) solid;
+    bottom: auto;
+    background: linear-gradient(white, white) padding-box,
+                conic-gradient(
+                    from -90deg,
+                    var(--cost-low) 30deg, /* Rostock, Freiburg */
+                    var(--cost-medium) 80deg, /* Berlin */
+                    var(--cost-high) 130deg, /* München */
+                    transparent 180deg
+                ) border-box;
+    border-radius: 50em;
+    border: var(--track-size) solid transparent;
+    
+}
+
+
+.wheel__numerals {
+    /* Важно: возвращаем z-index: 1, чтобы города были поверх трека */
+    z-index: 1; 
+    position: absolute;
+    inset: calc(var(--track-size) * -0.38);
+}
+
+.wheel__numerals > span {
+    position: absolute;
+    padding: 0.3rem 0.5rem; /* Smaller padding */
+    transform: translate(-50%, -50%) translateY(10px); /* Move down to hide */
+    white-space: nowrap;
+    font-size: 0.7em; /* Significantly smaller font size */
+    font-weight: normal;
+    color: #333;
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s linear 0.3s; /* Transition for hover */
+    background-color: rgba(255, 255, 255, 0.8); /* Slight background for readability */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Corrected positions for the specific cities */
+.wheel__numerals > span:nth-child(1) { /* Rostock */
+    left: 15%; /* Closer to start */
+    top: 75%;
+}
+.wheel__numerals > span:nth-child(2) { /* Freiburg */
+    left: 35%;
+    top: 85%;
+}
+.wheel__numerals > span:nth-child(3) { /* Berlin */
+    left: 65%;
+    top: 85%;
+}
+.wheel__numerals > span:nth-child(4) { /* München */
+    left: 85%; /* Closer to end */
+    top: 75%;
+}
+
+
+.wheel__output {
+    position: absolute;
+    color: black;
+    font-weight: bold;
+    padding: 0 2.5rem;
+    font-size: 1.2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the output */
+}
+
+/* Styles for the range input itself */
+[type="range"] {
+    appearance: none;
+    width: calc(100% + var(--thumb-size));
+    outline: none; /* Remove outline on focus */
+    /* This transform is crucial for the arc movement */
+    transform: translateY(
+        calc(sqrt(2500 - (var(--value) - 50) * (var(--value) - 50)) * -1cqw)
+    );
+    margin: 0;
+    padding: 0;
+    cursor: grab; /* Default cursor */
+    z-index: 10; /* Ensure it's clickable above other elements */
+    position: relative; /* Needed for z-index to work */
+}
+
+[type="range"]:active {
+    --thumb-cursor: grabbing;
+}
+
+/* Webkit (Chrome, Safari) - track styles */
+::-webkit-slider-runnable-track {
+    background: transparent; /* Делаем трек полностью прозрачным */
+    appearance: none;
+    height: var(--thumb-size);
+    border: none; /* Убеждаемся, что нет бордера */
+    box-shadow: none; /* Убеждаемся, что нет тени */
+    outline: none; /* Убираем outline при фокусе */
+}
+
+/* Webkit (Chrome, Safari) - thumb styles */
+::-webkit-slider-thumb {
+    appearance: none;
+    border-radius: 50%;
+    background-color: var(--accent-000); /* Это ваша черная точка */
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border: none; /* Убеждаемся, что нет бордера */
+    box-shadow: none; /* Убеждаемся, что нет тени */
+    cursor: var(--thumb-cursor, grab);
+    position: relative;
+    z-index: 10;
+}
+
+/* Firefox - track styles */
+::-moz-range-track {
+    background: transparent; /* Делаем трек полностью прозрачным */
+    appearance: none;
+    height: var(--track-size);
+    border: none; /* Убеждаемся, что нет бордера */
+    box-shadow: none; /* Убеждаемся, что нет тени */
+    outline: none; /* Убираем outline при фокусе */
+}
+
+/* Firefox - thumb styles */
+::-moz-range-thumb {
+    appearance: none;
+    border-radius: 50%;
+    border: none; /* Убеждаемся, что нет бордера */
+    box-shadow: none; /* Убеждаемся, что нет тени */
+    background-color: var(--accent-000); /* Это ваша черная точка */
+    width: var(--thumb-size); /* Используем thumb-size для консистентности */
+    height: var(--thumb-size); /* Используем thumb-size для консистентности */
+    cursor: var(--thumb-cursor, grab);
+}
