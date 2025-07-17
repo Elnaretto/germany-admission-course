@@ -532,71 +532,72 @@ footer {
         font-size: 1em;
         margin-bottom: 3px;
     }
-} /* <--- Вот этот закрывающий медиа-запрос был лишним! */
+}
 
 /* --- Стили для Таймлайнов --- */
 .timeline {
     position: relative;
-    padding: 2rem 0;
-    max-width: 900px; /* Ограничиваем ширину таймлайна */
-    margin: 0 auto; /* Центрируем его */
+    padding: 2rem 0; /* Vertical padding */
+    max-width: 900px;
+    margin: 0 auto; /* Center the timeline */
 }
 
 .timeline::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 50%; /* Центральная линия по середине */
+    left: 50%; /* Center line */
     width: 4px;
-    background-color: #000; /* Цвет линии */
-    height: 100%;
-    transform: translateX(-50%); /* Центрируем линию точно */
-    box-shadow: 2px 2px 0 #000; /* Тень для линии */
+    background-color: #000;
+    height: 100%; /* Line fills parent height */
+    transform: translateX(-50%); /* Centering adjustment */
+    box-shadow: 2px 2px 0 #000;
+    z-index: 0; /* Ensure it's behind dots and content */
 }
 
 .timeline-item {
-    display: flex;
-    justify-content: space-between;
+    position: relative; /* For positioning dots and content inside */
     margin-bottom: 2.5rem;
-    position: relative;
     width: 100%;
     box-sizing: border-box;
-}
-
-.timeline-item:nth-child(odd) {
-    flex-direction: row-reverse; /* Чередуем элементы слева и справа */
+    min-height: 50px; /* Ensure some height for positioning */
+    /* Удалены display: flex и justify-content, так как dot абсолютно позиционирован */
 }
 
 .timeline-dot {
     position: absolute;
-    top: 0.5rem; /* Отступ сверху от контейнера timeline-content */
+    top: 0.5rem; /* Vertical position relative to timeline-item */
+    left: 50%; /* Aligns with the central line */
+    transform: translateX(-50%); /* Centers the dot on the line */
     width: 24px;
     height: 24px;
-    background-color: #ffcc00; /* Желтая точка */
+    background-color: #ffcc00;
     border: 3px solid #000;
     border-radius: 50%;
-    z-index: 1; /* Чтобы точка была над линией */
-    box-shadow: 3px 3px 0 #000; /* Тень для точки */
-    transform: translateX(-50%); /* Коррекция для центровки на линии */
+    z-index: 1; /* Above the line */
+    box-shadow: 3px 3px 0 #000;
 }
-
-.timeline-item:nth-child(odd) .timeline-dot {
-    left: 50%; /* Слева для нечетных (правый контент) */
-}
-
-.timeline-item:nth-child(even) .timeline-dot {
-    left: 50%; /* Слева для четных (левый контент) */
-}
-
 
 .timeline-content {
-    background-color: #ffe600; /* Светло-желтый фон для контента */
+    background-color: #ffe600;
     border: 3px solid #000;
     box-shadow: 6px 6px 0 #000;
     padding: 1.2rem;
-    width: calc(50% - 30px); /* Половина ширины минус отступ для линии */
+    width: calc(50% - 45px); /* Half width, accounting for dot and gap */
     box-sizing: border-box;
     transition: all 0.2s ease;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    /* Content on the left side */
+    margin-left: 0;
+    margin-right: auto; /* Pushes content to the left */
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    /* Content on the right side */
+    margin-left: auto; /* Pushes content to the right */
+    margin-right: 0;
 }
 
 .timeline-content:hover {
@@ -627,21 +628,20 @@ footer {
     }
 
     .timeline::before {
-        left: 20px; /* Перемещаем линию влево для мобильных */
-        transform: translateX(0);
+        left: 20px; /* Move line to the left edge */
+        transform: translateX(0); /* No horizontal transform */
         box-shadow: 1px 1px 0 #000;
     }
 
     .timeline-item {
-        flex-direction: column !important; /* Всегда в столбик */
-        align-items: flex-start; /* Выравниваем по левому краю */
+        /* On mobile, all items stack and align to the left line */
         margin-bottom: 2rem;
     }
 
     .timeline-dot {
-        left: 20px; /* Точка выравнивается по линии */
-        transform: translateX(-50%);
-        top: 0.2rem; /* Немного ниже, чтобы соответствовать контенту */
+        left: 20px; /* Dot aligns with the left line */
+        transform: translateX(-50%); /* Keep half its width off the line */
+        top: 0.2rem;
         width: 20px;
         height: 20px;
         border-width: 2px;
@@ -649,8 +649,9 @@ footer {
     }
 
     .timeline-content {
-        width: calc(100% - 40px); /* Полная ширина минус отступ для линии и точки */
-        margin-left: 40px; /* Отступ от линии */
+        width: calc(100% - 40px); /* Full width minus space for line/dot */
+        margin-left: 40px; /* Offset content from the line */
+        margin-right: 0; /* Reset right margin for mobile */
         padding: 1rem;
         box-shadow: 4px 4px 0 #000;
         border-width: 2px;
@@ -671,7 +672,7 @@ footer {
     }
 
     .timeline::before {
-        left: 15px; /* Линия еще левее */
+        left: 15px; /* Line even more to the left */
         width: 3px;
         box-shadow: 1px 1px 0 #000;
     }
