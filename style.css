@@ -2,12 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;700&display=swap');
 
 /* Общие стили */
-body {
-    font-family: 'Roboto Mono', monospace;
-    background-color: #f5f5f5; /* Вернули ваш оригинальный фон */
-    color: #1a1a1a;
+/* --- КРИТИЧЕСКИ ВАЖНО: Устанавливаем высоту для html и body --- */
+html, body {
+    height: 100%; /* Гарантирует, что html и body занимают всю высоту окна просмотра */
     margin: 0;
     padding: 0;
+    font-family: 'Roboto Mono', monospace;
+    background-color: #f5f5f5;
+    color: #1a1a1a;
     line-height: 1.6;
     font-size: 1.1rem;
 }
@@ -296,220 +298,75 @@ footer {
     box-shadow: 0 -8px 0 #000;
 }
 
-/* --- Стили для ползунка "Стоимость жизни" --- */
-.wheel-container {
-    padding: 2rem 0;
-    text-align: center;
+/* --- Стили для карты Leaflet --- */
+.map-container {
+    padding: 1.5rem; /* Соответствует padding neo-brutalist */
     margin-bottom: 2rem;
     border: 4px solid #000;
     box-shadow: 8px 8px 0 #000;
     background-color: #fff;
-    overflow: hidden; /* Ensure cities don't overflow */
+    box-sizing: border-box;
 }
 
-
-:root {
-    --thumb-size: 2rem;
-    --track-size: 4rem;
-    --half-thumb-size: calc(var(--track-size) / 2);
-
-    --value: 0; /* This will be set by JS */
-
-    /* Adjusted colors for cost of living */
-    --cost-low: #78b232;   /* Green for low cost */
-    --cost-medium: #efad08; /* Orange for medium cost */
-    --cost-high: #da3d27;  /* Red for high cost */
-    --accent-000: #000; /* Thumb color (black) */
+#germany-map {
+    height: 700px; /* Высота карты */
+    width: 100%;
+    border: 0px solid #000; /* Внутренняя рамка карты */
+    box-shadow: 4px 4px 0 #000; /* Внутренняя тень карты */
+    background-color: #f0f0f0;
 }
 
-
-.wheel {
-	color: var(--accent-900);
-	display: block;
-	width: 15rem;
-	margin: 0 auto;
-	font-size: 0.8rem;
-	font-weight: bold;
-	aspect-ratio: 1 / 1;
-
-	display: inline-grid;
-	align-items: center;
-	background: no-repeat;
-	container-type: inline-size;
-	container-name: knobs;
-	align-items: center;
-	justify-items: center;
-	position: relative;
-	// background: #ff000030;
-
-    /* Add transition for city visibility */
-    transition: all 0.3s ease-in-out;
+/* Стилизация всплывающих окон Leaflet (Popups) */
+.leaflet-popup-content-wrapper {
+    background-color: #ffcc00 !important; /* Фон всплывающего окна */
+    color: #000 !important; /* Цвет текста */
+    border: 2px solid #000 !important;
+    border-radius: 0 !important; /* Убираем скругление углов */
+    box-shadow: 4px 4px 0 #000 !important; /* Тень в стиле брутализма */
+    font-family: 'Roboto Mono', monospace !important;
+    font-weight: bold !important;
+    font-size: 1rem !important;
+    padding: 10px 15px !important;
 }
 
-/* Show city names on hover over the wheel container */
-.wheel-container:hover .wheel__numerals > span {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) translateY(0); /* Reset transform on hover */
+.leaflet-popup-content {
+    margin: 0 !important;
 }
 
-
-.wheel::after,
-.wheel::before {
-    content: "";
-    position: absolute;
-    inset: calc(var(--track-size) * -0.5);
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    /* Возвращаем mix-blend-mode, который был в оригинале и пропал в предыдущей версии */
-    mix-blend-mode: darken; 
-    pointer-events: none;
+.leaflet-popup-tip-container {
+    display: none; /* Скрываем "хвостик" всплывающего окна */
 }
 
-.wheel::before {
-    width: var(--track-size);
-    box-shadow: 100cqw 0px 0 var(--cost-low); /* Use cqw here */
-    z-index: 1;
-    background-color: var(--cost-low);
-    top: calc(50% + calc(var(--track-size) * -0.5));
+.leaflet-popup-close-button {
+    color: #000 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    top: 5px !important;
+    right: 5px !important;
 }
 
-.wheel::after {
-    background: none;
-    width: auto;
-    border-width: var(--track-size);
-    inset: calc(var(--track-size) * -0.5);
-    border: var(--track-size) solid;
-    bottom: auto;
-    background: linear-gradient(white, white) padding-box,
-                conic-gradient(
-                    from -90deg,
-                    var(--cost-low) 30deg, /* Rostock, Freiburg */
-                    var(--cost-medium) 80deg, /* Berlin */
-                    var(--cost-high) 130deg, /* München */
-                    transparent 180deg
-                ) border-box;
-    border-radius: 50em;
-    border: var(--track-size) solid transparent;
-    
+.leaflet-popup-close-button:hover {
+    color: #da3d27 !important; /* Цвет при наведении на кнопку закрытия */
 }
 
-
-.wheel__numerals {
-    /* Важно: возвращаем z-index: 1, чтобы города были поверх трека */
-    z-index: 1; 
-    position: absolute;
-    inset: calc(var(--track-size) * -0.38);
+/* Стили для легенды Leaflet */
+.info.legend.neo-brutalist {
+    background-color: #fff; /* Фон легенды */
+    padding: 10px 15px;
+    line-height: 1.5em;
+    font-size: 0.9em;
+    color: #000;
+    border: 4px solid #000; /* Рамка в стиле брутализма */
+    box-shadow: 6px 6px 0 #000; /* Тень в стиле брутализма */
+    font-family: 'Roboto Mono', monospace;
+    text-align: left;
 }
 
-.wheel__numerals > span {
-    position: absolute;
-    padding: 0.3rem 0.5rem; /* Smaller padding */
-    transform: translate(-50%, -50%) translateY(10px); /* Move down to hide */
-    white-space: nowrap;
-    font-size: 0.7em; /* Significantly smaller font size */
-    font-weight: normal;
-    color: #333;
-    opacity: 0; /* Hidden by default */
-    visibility: hidden; /* Hidden by default */
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s linear 0.3s; /* Transition for hover */
-    background-color: rgba(255, 255, 255, 0.8); /* Slight background for readability */
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* Corrected positions for the specific cities */
-.wheel__numerals > span:nth-child(1) { /* Rostock */
-    left: 15%; /* Closer to start */
-    top: 75%;
-}
-.wheel__numerals > span:nth-child(2) { /* Freiburg */
-    left: 35%;
-    top: 85%;
-}
-.wheel__numerals > span:nth-child(3) { /* Berlin */
-    left: 65%;
-    top: 85%;
-}
-.wheel__numerals > span:nth-child(4) { /* München */
-    left: 85%; /* Closer to end */
-    top: 75%;
-}
-
-
-.wheel__output {
-    position: absolute;
-    color: black;
-    font-weight: bold;
-    padding: 0 2.5rem;
-    font-size: 1.2rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center the output */
-}
-
-/* Styles for the range input itself */
-[type="range"] {
-    appearance: none;
-    width: calc(100% + var(--thumb-size));
-    outline: none; /* Remove outline on focus */
-    /* This transform is crucial for the arc movement */
-    transform: translateY(
-        calc(sqrt(2500 - (var(--value) - 50) * (var(--value) - 50)) * -1cqw)
-    );
-    margin: 0;
-    padding: 0;
-    cursor: grab; /* Default cursor */
-    z-index: 10; /* Ensure it's clickable above other elements */
-    position: relative; /* Needed for z-index to work */
-}
-
-[type="range"]:active {
-    --thumb-cursor: grabbing;
-}
-
-/* Webkit (Chrome, Safari) - track styles */
-::-webkit-slider-runnable-track {
-    background: transparent; /* Делаем трек полностью прозрачным */
-    appearance: none;
-    height: var(--thumb-size);
-    border: none; /* Убеждаемся, что нет бордера */
-    box-shadow: none; /* Убеждаемся, что нет тени */
-    outline: none; /* Убираем outline при фокусе */
-}
-
-/* Webkit (Chrome, Safari) - thumb styles */
-::-webkit-slider-thumb {
-    appearance: none;
-    border-radius: 50%;
-    background-color: var(--accent-000); /* Это ваша черная точка */
-    width: var(--thumb-size);
-    height: var(--thumb-size);
-    border: none; /* Убеждаемся, что нет бордера */
-    box-shadow: none; /* Убеждаемся, что нет тени */
-    cursor: var(--thumb-cursor, grab);
-    position: relative;
-    z-index: 10;
-}
-
-/* Firefox - track styles */
-::-moz-range-track {
-    background: transparent; /* Делаем трек полностью прозрачным */
-    appearance: none;
-    height: var(--track-size);
-    border: none; /* Убеждаемся, что нет бордера */
-    box-shadow: none; /* Убеждаемся, что нет тени */
-    outline: none; /* Убираем outline при фокусе */
-}
-
-/* Firefox - thumb styles */
-::-moz-range-thumb {
-    appearance: none;
-    border-radius: 50%;
-    border: none; /* Убеждаемся, что нет бордера */
-    box-shadow: none; /* Убеждаемся, что нет тени */
-    background-color: var(--accent-000); /* Это ваша черная точка */
-    width: var(--thumb-size); /* Используем thumb-size для консистентности */
-    height: var(--thumb-size); /* Используем thumb-size для консистентности */
-    cursor: var(--thumb-cursor, grab);
+.info.legend.neo-brutalist h4 {
+    margin: 0 0 5px;
+    color: #000;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2em;
+    text-align: center;
 }

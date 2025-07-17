@@ -6,6 +6,7 @@
     <title>Сколько это всё стоит?</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
     <header class="neo-brutalist">
@@ -24,6 +25,7 @@
             <li><a href="page6.html">Каковы мои шансы?</a></li>
         </ul>
     </nav>
+
     <main>
         <section class="topic-content neo-brutalist">
             <h2>Сколько это всё стоит?</h2>
@@ -77,61 +79,24 @@
             </ul>
 
             <h3>Финансовые гарантии</h3>
-            <p>НО: для получения визы в Германию нужно доказать, что у тебя <strong>на счету есть 11900 евро</strong> (из расчета 990 евро в месяц). Их нужно положить на блокированный счет в немецком банке. Для этих целей удобнее всего специальный студенческий банк <strong>Fintiba</strong> (его же советует посольство Германии в РФ)</p>
+            <p>НО: для получения визы в Германию нужно доказать, что у тебя <strong>на счету есть 11900 евро</strong> (из расчета 990 евро в месяц). Их нужно положить на блокированный счет в немецком банке. Для этих целей удобнее всего специальный студенческий банк <strong>Fintiba</strong> (его же советует пососольство Германии в РФ)</p>
             <p>Другой вариант: найти немецкого гражданина/обладателя ВНЖ, что он может выступить твоим спонсором, подписать на тебя <strong>Verpflichtungserklärung</strong> (гарантийное письмо). Важное условие: ежемесячный <strong>чистый доход</strong> (netto Einkommen) приглашающего лица – минимум <strong>1.328 евро в месяц</strong>.</p>
             <p>Где искать таких граждан? Спрашивать по русскоязычным группам, искать среди родных, друзей.</p>
             <p><strong>Спойлер:</strong> соглашаются все крайне неохотно, так как Verpflichtungserklärung имеет важное, не очень приятное обязательство: спонсор <strong>юридически обязан возместить государству</strong> ВСЕ расходы, которые понесла Германия из-за нахождения приглашенного.</p>
             <p>Например, расходы на медицинское обслуживание без страховки, <strong>расходы на депортацию</strong> или соцпомощь, если ты остался без денег. Или штрафы, если ты что-то нарушил (например, неправильно рассортировал мусор – заплати штраф 2500 евро).</p>
             <p>Вишенка на торте: отозвать Verpflichtungserklärung после регистрации в миграционном бюро <strong>невозможно</strong>; обязательства сохраняются до истечения визы или оснований пребывания.</p>
         </section>
+
+        <section class="map-container neo-brutalist">
+            <h2>Стоимость жизни в городах Германии</h2>
+            <div id="germany-map"></div>
+        </section>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.main-nav a');
+    <footer>
+        <p>&copy; 2025 Курс по поступлению в Германию. Все права защищены.</p>
+    </footer>
 
-            navLinks.forEach(link => {
-                const linkPath = link.getAttribute('href');
-                if (linkPath === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
-
-        <section class="wheel-container neo-brutalist">
-            <h2>Стоимость жизни в городах Германии</h2>
-            <div class="wheel" id="cost-of-living-wheel">
-                <input id="cost-of-living-range" type="range" value="0" autocomplete="off" min="0" max="100">
-                <div id="cost-of-living-output" class="wheel__output">Стоимость жизни</div>
-                <div class="wheel__numerals">
-                    <span data-value="10">Rostock<br>€1500</span>
-                    <span data-value="35">Freiburg<br>€1700</span>
-                    <span data-value="65">Berlin<br>€2100</span>
-                    <span data-value="90">München<br>€2300</span>
-                </div>
-            </div>
-        </section>
-        </main>
-
-    <script src="script.js"></script> <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.main-nav a');
-
-            navLinks.forEach(link => {
-                const linkPath = link.getAttribute('href');
-                if (linkPath === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-        <footer>
-            <p>&copy; 2025 Курс по поступлению в Германию. Все права защищены.</p>
-        </footer>
-</body>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script> </body>
 </html>
