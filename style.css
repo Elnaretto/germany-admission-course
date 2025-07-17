@@ -455,6 +455,53 @@ footer {
     .info.legend.neo-brutalist h4 {
         font-size: 1.1em;
     }
+
+    /* Медиа-запросы для таймлайна */
+    .timeline {
+        padding: 1rem 0;
+    }
+
+    .timeline::before {
+        left: 20px; /* Move line to the left edge */
+        transform: translateX(0); /* No horizontal transform */
+        box-shadow: 1px 1px 0 #000;
+    }
+
+    .timeline-item {
+        margin-bottom: 2rem;
+    }
+
+    .timeline-dot {
+        left: 20px; /* Dot aligns with the left line */
+        transform: translateX(-50%); /* Keep half its width off the line */
+        top: 0.2rem;
+        width: 20px;
+        height: 20px;
+        border-width: 2px;
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    /* Специфично для мобильных устройств: все элементы контента выравниваются слева */
+    .timeline-item:nth-child(even) .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content {
+        width: calc(100% - 40px); /* Full width minus space for line/dot */
+        margin-left: 40px; /* Offset content from the line */
+        margin-right: 0; /* Ensure no right margin */
+    }
+
+    .timeline-content {
+        padding: 1rem;
+        box-shadow: 4px 4px 0 #000;
+        border-width: 2px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.4rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.95rem;
+    }
 }
 
 /* Для экранов меньше 576px (смартфоны) */
@@ -532,14 +579,56 @@ footer {
         font-size: 1em;
         margin-bottom: 3px;
     }
+
+    /* Медиа-запросы для таймлайна */
+    .timeline {
+        padding: 0.5rem 0;
+    }
+
+    .timeline::before {
+        left: 15px; /* Line even more to the left */
+        width: 3px;
+        box-shadow: 1px 1px 0 #000;
+    }
+
+    .timeline-dot {
+        left: 15px;
+        width: 18px;
+        height: 18px;
+        border-width: 2px;
+        box-shadow: 1px 1px 0 #000;
+        top: 0.1rem;
+    }
+
+    /* Специфично для мобильных устройств: все элементы контента выравниваются слева */
+    .timeline-item:nth-child(even) .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content {
+        width: calc(100% - 35px);
+        margin-left: 35px;
+        margin-right: 0;
+    }
+
+    .timeline-content {
+        padding: 0.8rem;
+        box-shadow: 3px 3px 0 #000;
+        border-width: 2px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.9rem;
+    }
 }
 
-/* --- Стили для Таймлайнов --- */
+/* --- Стили для Таймлайнов (Десктоп) --- */
 .timeline {
     position: relative;
-    padding: 2rem 0; /* Vertical padding */
+    padding: 2rem 0;
     max-width: 900px;
-    margin: 0 auto; /* Center the timeline */
+    margin: 0 auto;
 }
 
 .timeline::before {
@@ -549,32 +638,31 @@ footer {
     left: 50%; /* Center line */
     width: 4px;
     background-color: #000;
-    height: 100%; /* Line fills parent height */
-    transform: translateX(-50%); /* Centering adjustment */
+    height: 100%;
+    transform: translateX(-50%);
     box-shadow: 2px 2px 0 #000;
-    z-index: 0; /* Ensure it's behind dots and content */
+    z-index: 0;
 }
 
 .timeline-item {
-    position: relative; /* For positioning dots and content inside */
+    position: relative;
     margin-bottom: 2.5rem;
     width: 100%;
     box-sizing: border-box;
-    min-height: 50px; /* Ensure some height for positioning */
-    /* Удалены display: flex и justify-content, так как dot абсолютно позиционирован */
+    min-height: 50px;
 }
 
 .timeline-dot {
     position: absolute;
-    top: 0.5rem; /* Vertical position relative to timeline-item */
-    left: 50%; /* Aligns with the central line */
-    transform: translateX(-50%); /* Centers the dot on the line */
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     width: 24px;
     height: 24px;
     background-color: #ffcc00;
     border: 3px solid #000;
     border-radius: 50%;
-    z-index: 1; /* Above the line */
+    z-index: 1;
     box-shadow: 3px 3px 0 #000;
 }
 
@@ -583,20 +671,18 @@ footer {
     border: 3px solid #000;
     box-shadow: 6px 6px 0 #000;
     padding: 1.2rem;
-    width: calc(50% - 45px); /* Half width, accounting for dot and gap */
+    width: calc(50% - 45px);
     box-sizing: border-box;
     transition: all 0.2s ease;
 }
 
 .timeline-item:nth-child(even) .timeline-content {
-    /* Content on the left side */
     margin-left: 0;
-    margin-right: auto; /* Pushes content to the left */
+    margin-right: auto;
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
-    /* Content on the right side */
-    margin-left: auto; /* Pushes content to the right */
+    margin-left: auto;
     margin-right: 0;
 }
 
@@ -619,86 +705,4 @@ footer {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 0;
-}
-
-/* Медиа-запросы для адаптивности таймлайна */
-@media (max-width: 768px) {
-    .timeline {
-        padding: 1rem 0;
-    }
-
-    .timeline::before {
-        left: 20px; /* Move line to the left edge */
-        transform: translateX(0); /* No horizontal transform */
-        box-shadow: 1px 1px 0 #000;
-    }
-
-    .timeline-item {
-        /* On mobile, all items stack and align to the left line */
-        margin-bottom: 2rem;
-    }
-
-    .timeline-dot {
-        left: 20px; /* Dot aligns with the left line */
-        transform: translateX(-50%); /* Keep half its width off the line */
-        top: 0.2rem;
-        width: 20px;
-        height: 20px;
-        border-width: 2px;
-        box-shadow: 2px 2px 0 #000;
-    }
-
-    .timeline-content {
-        width: calc(100% - 40px); /* Full width minus space for line/dot */
-        margin-left: 40px; /* Offset content from the line */
-        margin-right: 0; /* Reset right margin for mobile */
-        padding: 1rem;
-        box-shadow: 4px 4px 0 #000;
-        border-width: 2px;
-    }
-
-    .timeline-content h3 {
-        font-size: 1.4rem;
-    }
-
-    .timeline-content p {
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .timeline {
-        padding: 0.5rem 0;
-    }
-
-    .timeline::before {
-        left: 15px; /* Line even more to the left */
-        width: 3px;
-        box-shadow: 1px 1px 0 #000;
-    }
-
-    .timeline-dot {
-        left: 15px;
-        width: 18px;
-        height: 18px;
-        border-width: 2px;
-        box-shadow: 1px 1px 0 #000;
-        top: 0.1rem;
-    }
-
-    .timeline-content {
-        width: calc(100% - 35px);
-        margin-left: 35px;
-        padding: 0.8rem;
-        box-shadow: 3px 3px 0 #000;
-        border-width: 2px;
-    }
-
-    .timeline-content h3 {
-        font-size: 1.2rem;
-    }
-
-    .timeline-content p {
-        font-size: 0.9rem;
-    }
 }
