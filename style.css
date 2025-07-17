@@ -532,4 +532,172 @@ footer {
         font-size: 1em;
         margin-bottom: 3px;
     }
+} /* <--- Вот этот закрывающий медиа-запрос был лишним! */
+
+/* --- Стили для Таймлайнов --- */
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+    max-width: 900px; /* Ограничиваем ширину таймлайна */
+    margin: 0 auto; /* Центрируем его */
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%; /* Центральная линия по середине */
+    width: 4px;
+    background-color: #000; /* Цвет линии */
+    height: 100%;
+    transform: translateX(-50%); /* Центрируем линию точно */
+    box-shadow: 2px 2px 0 #000; /* Тень для линии */
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row-reverse; /* Чередуем элементы слева и справа */
+}
+
+.timeline-dot {
+    position: absolute;
+    top: 0.5rem; /* Отступ сверху от контейнера timeline-content */
+    width: 24px;
+    height: 24px;
+    background-color: #ffcc00; /* Желтая точка */
+    border: 3px solid #000;
+    border-radius: 50%;
+    z-index: 1; /* Чтобы точка была над линией */
+    box-shadow: 3px 3px 0 #000; /* Тень для точки */
+    transform: translateX(-50%); /* Коррекция для центровки на линии */
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+    left: 50%; /* Слева для нечетных (правый контент) */
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: 50%; /* Слева для четных (левый контент) */
+}
+
+
+.timeline-content {
+    background-color: #ffe600; /* Светло-желтый фон для контента */
+    border: 3px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    padding: 1.2rem;
+    width: calc(50% - 30px); /* Половина ширины минус отступ для линии */
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.timeline-content:hover {
+    box-shadow: 4px 4px 0 #000;
+    transform: translate(2px, 2px);
+}
+
+.timeline-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.timeline-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Медиа-запросы для адаптивности таймлайна */
+@media (max-width: 768px) {
+    .timeline {
+        padding: 1rem 0;
+    }
+
+    .timeline::before {
+        left: 20px; /* Перемещаем линию влево для мобильных */
+        transform: translateX(0);
+        box-shadow: 1px 1px 0 #000;
+    }
+
+    .timeline-item {
+        flex-direction: column !important; /* Всегда в столбик */
+        align-items: flex-start; /* Выравниваем по левому краю */
+        margin-bottom: 2rem;
+    }
+
+    .timeline-dot {
+        left: 20px; /* Точка выравнивается по линии */
+        transform: translateX(-50%);
+        top: 0.2rem; /* Немного ниже, чтобы соответствовать контенту */
+        width: 20px;
+        height: 20px;
+        border-width: 2px;
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    .timeline-content {
+        width: calc(100% - 40px); /* Полная ширина минус отступ для линии и точки */
+        margin-left: 40px; /* Отступ от линии */
+        padding: 1rem;
+        box-shadow: 4px 4px 0 #000;
+        border-width: 2px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.4rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .timeline {
+        padding: 0.5rem 0;
+    }
+
+    .timeline::before {
+        left: 15px; /* Линия еще левее */
+        width: 3px;
+        box-shadow: 1px 1px 0 #000;
+    }
+
+    .timeline-dot {
+        left: 15px;
+        width: 18px;
+        height: 18px;
+        border-width: 2px;
+        box-shadow: 1px 1px 0 #000;
+        top: 0.1rem;
+    }
+
+    .timeline-content {
+        width: calc(100% - 35px);
+        margin-left: 35px;
+        padding: 0.8rem;
+        box-shadow: 3px 3px 0 #000;
+        border-width: 2px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.9rem;
+    }
 }
