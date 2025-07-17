@@ -12,6 +12,7 @@ html, body {
     color: #1a1a1a;
     line-height: 1.6;
     font-size: 1.1rem;
+    box-sizing: border-box; /* Важно для box-model */
 }
 
 /* Стили для нео-брутализма */
@@ -22,7 +23,7 @@ html, body {
     padding: 1.5rem;
     margin-bottom: 2rem;
     background-color: #fff;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Гарантируем, что padding не увеличивает общую ширину */
 }
 
 .neo-brutalist:hover {
@@ -35,6 +36,8 @@ h1, h2, h3, h4 {
     color: #000;
     text-transform: uppercase;
     margin-top: 0;
+    font-family: 'Bebas Neue', sans-serif; /* Для бруталистического эффекта */
+    letter-spacing: 1px;
 }
 
 h1 {
@@ -66,13 +69,14 @@ main {
     max-width: 1000px;
     margin: 2rem auto;
     padding: 0 2rem;
+    box-sizing: border-box;
 }
 
 section {
     margin-bottom: 3rem;
 }
 
-/* Стили для карточек компонентов */
+/* Стили для карточек компонентов (если используются) */
 .component-card {
     height: 100%;
     display: flex;
@@ -117,10 +121,15 @@ section {
     margin-top: 1.5rem;
     text-align: center;
     white-space: nowrap;
+    border: 2px solid #000; /* Добавил рамку для брутализма */
+    box-shadow: 4px 4px 0 #000; /* Добавил тень */
+    transition: all 0.1s ease;
 }
 
 .button:hover {
     background-color: #ffdd33;
+    box-shadow: 2px 2px 0 #000;
+    transform: translate(2px, 2px);
 }
 
 /* Дополнительные стили для нового контента */
@@ -179,7 +188,7 @@ section {
     margin-bottom: 2rem;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
 }
 
 .main-nav ul {
@@ -222,7 +231,7 @@ section {
     background-color: #000;
     color: #ffcc00;
     box-shadow: inset 2px 2px 0 #ffcc00;
-    pointer-events: none;
+    pointer-events: none; /* Делает активный пункт некликабельным */
 }
 
 /* Стили для таблиц */
@@ -261,30 +270,8 @@ section {
 }
 
 .table-container {
-    overflow-x: auto;
+    overflow-x: auto; /* Позволяет таблицам прокручиваться по горизонтали на маленьких экранах */
     margin-bottom: 2rem;
-}
-
-
-/* Медиа-запросы для адаптивности */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-    h2 {
-        font-size: 2rem;
-    }
-    h3 {
-        font-size: 1.5rem;
-    }
-    .main-nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    .main-nav a {
-        width: 100%;
-        text-align: center;
-    }
 }
 
 /* Футер */
@@ -309,7 +296,7 @@ footer {
 }
 
 #germany-map {
-    height: 700px; /* Высота карты */
+    height: 700px; /* Высота карты по умолчанию для больших экранов */
     width: 100%;
     border: 0px solid #000; /* Внутренняя рамка карты */
     box-shadow: 4px 4px 0 #000; /* Внутренняя тень карты */
@@ -369,4 +356,180 @@ footer {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.2em;
     text-align: center;
+}
+
+/* --- Медиа-запросы для адаптивности --- */
+
+/* Для экранов меньше 768px (планшеты и меньшие) */
+@media (max-width: 768px) {
+    /* Общие отступы и размеры */
+    html, body {
+        font-size: 1rem; /* Уменьшаем базовый размер шрифта */
+    }
+    main {
+        padding: 0 1.5rem; /* Уменьшаем горизонтальные отступы для контента */
+    }
+    .neo-brutalist {
+        padding: 1rem; /* Уменьшаем padding у бруталистических блоков */
+        box-shadow: 6px 6px 0 #000; /* Уменьшаем тени */
+        margin-bottom: 1.5rem;
+    }
+    .neo-brutalist:hover {
+        box-shadow: 4px 4px 0 #000;
+    }
+
+    /* Заголовки */
+    h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+    }
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    /* Навигация */
+    .main-nav {
+        padding: 0.8rem 1rem;
+        box-shadow: 0 6px 0 #000, 0 -6px 0 #000;
+    }
+    .main-nav ul {
+        flex-direction: column; /* Элементы навигации в столбик */
+        align-items: center; /* Центрируем по горизонтали */
+        gap: 0.6rem;
+    }
+    .main-nav a {
+        width: 100%; /* Занимают всю доступную ширину */
+        text-align: center;
+        padding: 0.7rem 1rem;
+        font-size: 1rem;
+        box-shadow: 3px 3px 0 #000;
+    }
+    .main-nav a:hover {
+        box-shadow: 1px 1px 0 #000;
+        transform: translate(2px, 2px);
+    }
+    .main-nav a.active {
+        box-shadow: inset 1px 1px 0 #ffcc00;
+    }
+
+    /* Списки контента */
+    .content-list li {
+        padding: 0.8rem 1rem 0.8rem 2.2rem; /* Уменьшаем padding и left-padding */
+        box-shadow: 3px 3px 0 #000;
+    }
+    .content-list li:before {
+        font-size: 1.3rem; /* Чуть меньше стрелка */
+        left: 0.6rem;
+    }
+
+    /* Таблицы */
+    .brutalist-table {
+        border-width: 2px; /* Уменьшаем рамку */
+        box-shadow: 4px 4px 0 #000;
+    }
+    .brutalist-table th,
+    .brutalist-table td {
+        padding: 0.6rem 0.8rem; /* Уменьшаем padding ячеек */
+        border-width: 1px; /* Уменьшаем толщину внутренних рамок */
+        font-size: 0.9rem;
+    }
+
+    /* Карта */
+    #germany-map {
+        height: 500px; /* Уменьшаем высоту карты для планшетов */
+        box-shadow: 3px 3px 0 #000;
+    }
+
+    /* Легенда карты */
+    .info.legend.neo-brutalist {
+        padding: 8px 10px;
+        font-size: 0.8em;
+        border-width: 2px;
+        box-shadow: 4px 4px 0 #000;
+    }
+    .info.legend.neo-brutalist h4 {
+        font-size: 1.1em;
+    }
+}
+
+/* Для экранов меньше 576px (смартфоны) */
+@media (max-width: 576px) {
+    /* Общие отступы и размеры */
+    html, body {
+        font-size: 0.95rem; /* Ещё уменьшаем базовый размер шрифта */
+    }
+    main {
+        padding: 0 0.8rem; /* Минимальные горизонтальные отступы */
+    }
+    .neo-brutalist {
+        padding: 0.8rem;
+        box-shadow: 4px 4px 0 #000;
+        margin-bottom: 1rem;
+    }
+    .neo-brutalist:hover {
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    /* Заголовки */
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+    h3 {
+        font-size: 1.3rem;
+    }
+    h4 {
+        font-size: 1.1rem;
+    }
+
+    /* Навигация */
+    .main-nav {
+        padding: 0.6rem 0.5rem;
+        box-shadow: 0 4px 0 #000, 0 -4px 0 #000;
+        margin-bottom: 1.5rem;
+    }
+    .main-nav ul {
+        gap: 0.4rem;
+    }
+    .main-nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    /* Списки контента */
+    .content-list li {
+        padding: 0.6rem 0.8rem 0.6rem 2rem;
+        box-shadow: 2px 2px 0 #000;
+        margin-bottom: 0.8rem;
+    }
+    .content-list li:before {
+        font-size: 1.1rem;
+        left: 0.5rem;
+    }
+
+    /* Карта */
+    #germany-map {
+        height: 350px; /* Уменьшаем высоту карты для смартфонов */
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    /* Легенда карты */
+    .info.legend.neo-brutalist {
+        padding: 6px 8px;
+        font-size: 0.7em;
+        border-width: 2px;
+        box-shadow: 3px 3px 0 #000;
+    }
+    .info.legend.neo-brutalist h4 {
+        font-size: 1em;
+        margin-bottom: 3px;
+    }
 }
