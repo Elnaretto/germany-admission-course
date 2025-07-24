@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Почему именно Германия?</title>
+    <title>Сколько это всё стоит?</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Подключение Chart.js для графиков -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 <body>
     <header class="neo-brutalist">
-        <h1>Как поступить в Германию легко</h1>
+        <h1 class="main-title">Как поступить в Германию легко</h1>
         <p>Поступаем в Германию: лайфхаки, разбор кейсов на практике</p>
-        <p class="event-date"></p>
+        <p class="event-date"></p> <!-- Дата события неактуальна для этой страницы -->
     </header>
 
     <nav class="main-nav neo-brutalist">
@@ -24,6 +26,159 @@
             <li><a href="page6.html">Каковы мои шансы?</a></li>
         </ul>
     </nav>
+
+    <main>
+        <section class="topic-content neo-brutalist">
+            <h2>Сравним страны ЕС</h2>
+            <p>Ниже представлен сравнительный график среднегодовой стоимости обучения для иностранных студентов (не из ЕС) в Германии и соседях.</p>
+
+            <div class="chart-container neo-brutalist">
+                <canvas id="costChart"></canvas>
+            </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Активация текущей ссылки в навигации
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.main-nav a');
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href');
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Данные для графика (из вашего Python кода)
+            const countries = [
+                "Германия", "Франция", "Испания", "Италия", "Австрия",
+                "Швеция", "Дания", "Великобритания", "Швейцария"
+            ];
+
+            const tuitionFees = [
+                350,    // Germany (admin fee only)
+                3400,   // France
+                2000,   // Spain (approximate)
+                2000,   // Italy (approximate)
+                1500,   // Austria (approximate)
+                12500,  // Sweden (average range)
+                13000,  // Denmark (average range)
+                20000,  // UK (average range)
+                25000   // Switzerland (average range)
+            ];
+
+            const livingCosts = [
+                11160,  // Germany (€930/month average)
+                11000,  // France
+                9600,   // Spain
+                9600,   // Italy
+                9600,   // Austria
+                13200,  // Sweden
+                14400,  // Denmark
+                15600,  // UK
+                18000   // Switzerland
+            ];
+
+            // Теперь график будет отображать только стоимость обучения (tuitionFees)
+            const dataToShow = tuitionFees;
+
+            // Цветовая палитра из style.css
+            const primaryColor = '#ffc300'; // Светло-бирюзовый для баров
+            const darkColor = '#1d3557'; // Темно-синий для текста, границ
+            const mediumBlue = '#457b9d'; // Средний синий для сетки
+
+            // Инициализация Chart.js
+            const ctx = document.getElementById('costChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: countries,
+                    datasets: [{
+                        data: dataToShow, // Используем только tuitionFees
+                        backgroundColor: primaryColor, // Цвет баров
+                        borderColor: darkColor, // Цвет границ баров
+                        borderWidth: 2,
+                        borderRadius: 5, // Закругленные углы для баров
+                        hoverBackgroundColor: mediumBlue, // Цвет при наведении
+                        hoverBorderColor: darkColor
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Позволяет контролировать размер canvas
+                    plugins: {
+                        legend: {
+                            display: false // Скрываем легенду, так как она одна
+                        },
+                        title: {
+                            display: true,
+                            text: 'Сколько стоит?', // Обновленный заголовок
+                            font: {
+                                family: 'Bebas Neue', // Шрифт для заголовка графика
+                                size: 20,
+                                weight: 'bold'
+                            },
+                            color: darkColor // Цвет заголовка графика
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            formatter: (value) => `€${Math.round(value)}`, // Форматирование значений
+                            color: darkColor, // Цвет текста значений
+                            font: {
+                                family: 'Bebas Neue', // Шрифт для значений на барах
+                                size: 12,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '', // Обновленный заголовок оси Y
+                                font: {
+                                    family: 'Bebas Neue', // Шрифт для оси Y
+                                    size: 14
+                                },
+                                color: darkColor // Цвет заголовка оси Y
+                            },
+                            ticks: {
+                                color: darkColor, // Цвет меток оси Y
+                                font: {
+                                    family: 'Bebas Neue' // Шрифт для меток оси Y
+                                },
+                                callback: function(value) {
+                                    return `€${value}`; // Добавляем символ евро
+                                }
+                            },
+                           
+                        },
+                        x: {
+                            ticks: {
+                                color: darkColor, // Цвет меток оси X
+                                font: {
+                                    family: 'Bebas Neue' // Шрифт для меток оси X
+                                },
+                                maxRotation: 45, // Поворот меток для читаемости
+                                minRotation: 45
+                            },
+                            grid: {
+                                display: false, // Скрываем вертикальные линии сетки
+                                borderColor: darkColor // Цвет линии оси X
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels] // Регистрация плагина datalabels
+            });
+        });
+    </script>
+</body>
+</html>
+
 
     <main>
         <section class="topic-content neo-brutalist">

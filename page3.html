@@ -6,6 +6,7 @@
     <title>С чего начать?</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
     <header class="neo-brutalist">
@@ -51,24 +52,18 @@
             <a href="https://www2.daad.de/deutschland/studienangebote/international-programmes/en/result/?cert=&admReq=&langExamPC=&scholarshipLC=&langExamLC=&scholarshipSC=&langExamSC=&degree%5B%5D=&fos=&langDeAvailable=&langEnAvailable=&lang%5B%5D=&modStd%5B%5D=&cit%5B%5D=&tyi%5B%5D=&ins%5B%5D=&fee=&bgn%5B%5D=&dat%5B%5D=&prep_subj%5B%5D=&prep_degree%5B%5D=&sort=4&dur=&subjects%5B%5D=&q=&limit=10&offset=&display=list" target="_blank" class="button neo-brutalist">Перейти на сайт DAAD</a>
             <p>Это крупнейшее собрание почти всех учебных программ в Германии. Здесь есть и небольшие частные университеты, и MBA, и краткосрочные языковые курсы, и PhD. Сайт DAAD был моим настольным инструментом при выборе университета. Советую присмотреться.</p>
         </section>
-    </main>
 
+        <section class="map-container neo-brutalist">
+            <h2>Неочевидные университеты Германии</h2>
+            <div id="germany-map"></div>
+        </section>
+    </main>
+    
     <footer>
         <p>&copy; 2025 Курс по поступлению в Германию. Все права защищены.</p>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.main-nav a');
-
-            navLinks.forEach(link => {
-                const linkPath = link.getAttribute('href');
-                if (linkPath === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script-universities.js"></script>
 </body>
 </html>
